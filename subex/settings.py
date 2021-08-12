@@ -32,7 +32,7 @@ CLIENT_SECRET= "Rsgh7hzzMv" # 애플리케이션 등록시 발급 받은 값 입
 SECRET_KEY = '6#ga2&v%iro*_032_o+vx29(k18y=%04-f&y^cqbdz$5+mij8n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
