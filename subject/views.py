@@ -103,7 +103,7 @@ def search(request):
     Semester=request.GET.get('semester')
     
     subject_list=Subject.objects.filter(Q(name__icontains=searchWord)|Q(professor__iexact=searchWord)|Q(series_num__iexact=searchWord)|
-        Q(words_5__icontains=searchWord)|Q(keywords_3__icontains=searchWord)|Q(department__iexact=searchWord)).distinct()
+        Q(words_5__icontains=searchWord)|Q(keywords_3__icontains=searchWord)|Q(tags__icontains=searchWord)|Q(department__iexact=searchWord)).distinct()
 
     if (Year =='-') and (Semester =='-'):
         result_list=subject_list
