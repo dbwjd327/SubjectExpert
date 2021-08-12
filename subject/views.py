@@ -46,7 +46,8 @@ class SubjectDV(DetailView):
 
         #유사강의 추천
         #sim_ids -> 해당 과목 객체의 유사과목 id리스트 
-        sim_ids=list(RecommendSubject.objects.filter(subject=self.object.pk).values('recommend_subject').values_list('recommend_subject_id', flat=True))
+        sim_ids=list(RecommendSubject.objects.filter(subject=self.object.pk).
+        values('recommend_subject').values_list('recommend_subject_id', flat=True))
         sim=[]
         for i in sim_ids:
             sim.append(Subject.objects.get(id=i))
@@ -102,8 +103,8 @@ def search(request):
     Year=request.GET.get('year')
     Semester=request.GET.get('semester')
     
-    subject_list=Subject.objects.filter(Q(name__icontains=searchWord)|Q(professor__iexact=searchWord)|Q(series_num__iexact=searchWord)|
-        Q(words_5__icontains=searchWord)|Q(keywords_3__icontains=searchWord)|Q(tags__icontains=searchWord)|Q(department__iexact=searchWord)).distinct()
+    subject_list=Subject.objects.filter(Q(name__icontains=searchWord)|Q(professor__iexact=searchWord)|
+    Q(series_num__iexact=searchWord)|Q(department__iexact=searchWord)|Q(tags__icontains=searchWord)).distinct()
 
     if (Year =='-') and (Semester =='-'):
         result_list=subject_list
@@ -145,8 +146,7 @@ def search(request):
         else:
             sortlist=list(df.index)
 
-        #sortlist -> result_list를 dataframe 화하면서 새롭게 붙여진 index로 tfidf 가중치 내림차순 정렬한 list(index 범위: 0 ~ 쿼리셋의 길이) 
-        #           => 실제 pk값과 매칭 필요
+        #sortlist -> result_list를 dataframe 화하면서 새롭게 붙여진 index로 tfidf 가중치 내림차순 정렬한 list(index 범위: 0 ~ 쿼리셋의 길이) => 실제 pk값과 매칭 필요
         #key : dataframe의 index, value : 쿼리셋의 pk 매칭해 딕셔너리화해준다
         pklist=list(result_list.values_list('pk', flat=True))
         index_dict={}
@@ -163,8 +163,8 @@ def search(request):
         result_list =result_list.filter(pk__in=pk_sortlist).order_by(preserved)
 
         result_list_show=result_list
-        context['list']=sortlist
-        context['rl']=pklist
+        context['sortlist']=sortlist
+        context['pklist']=pklist
         context['resultlist']=result_list_show
 
     #한 페이지당 10개의 과목 데이터만 보여주기 위한 pagination

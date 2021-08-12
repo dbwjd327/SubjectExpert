@@ -3,14 +3,9 @@ from django.utils.translation import gettext as _
 from django.urls import reverse
 
 class Subject(models.Model):
-    YEAR_CHOICES=[
-    (2020, '2020년'),
-    (2021, '2021년')
-    ]
-    SEMESTER_CHOICES=[
-    ('1R', '1학기'),
-    ('2R', '2학기')
-    ]
+    YEAR_CHOICES=[(2020, '2020년'),(2021, '2021년')]
+    SEMESTER_CHOICES=[('1R', '1학기'),('2R', '2학기')]
+
     id = models.IntegerField(primary_key=True)
     series_num=models.CharField(_("series_num"), blank=False,max_length=255)
     num=models.IntegerField(_("num"), blank=False) 
@@ -39,14 +34,16 @@ class Subject(models.Model):
 
 #Recommend_subject N:N 관리 모델
 class RecommendSubject(models.Model):
-    subject=models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='recommend_subjects_rel')
-    recommend_subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='subjects')
+    subject=models.ForeignKey(Subject, on_delete=models.CASCADE, 
+    related_name='recommend_subjects_rel')
+    recommend_subject = models.ForeignKey(Subject, on_delete=models.CASCADE, 
+    related_name='subjects')
 
 class Kmooc(models.Model):
     id = models.IntegerField(primary_key=True)
     link= models.URLField(_("link")) 
     name = models.CharField(_("name"),  blank=False, max_length=255)
-    image= models.ImageField(_("image"),upload_to='moocs')
+    image= models.CharField(_("image"),blank=False, max_length=255)
     midclassify=models.CharField(_("midclassify"), max_length=255)
     level= models.CharField(_("level"), max_length=255)
 
