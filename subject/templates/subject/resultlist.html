@@ -81,11 +81,6 @@
     
         <h2> 과목 리스트  </h2>
         <p>총 {{ object_list.paginator.count }} 개의 검색결과 </p>
-        <!-- sortlist :
-        {{ list }}<br/>
-        pklist: {{ rl }}<br/>
-        {{ resultlist }} -->
-
             {% for subject in object_list %}
             <div class="classpage"> 
                 <li>
