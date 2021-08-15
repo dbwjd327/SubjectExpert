@@ -22,6 +22,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
 
 #네이버 API 연결
+CLIENT_ID = "DlIBHl_yvWsGrO8Rxqwg" # 애플리케이션 등록시 발급 받은 값 입력
+CLIENT_SECRET= "Rsgh7hzzMv" # 애플리케이션 등록시 발급 받은 값 입력
 
 
 # Quick-start development settings - unsuitable for production
