@@ -3,6 +3,7 @@
 
 {% load subject_tag %}
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{{ object.name }}{% endblock %}</title>
     <style>
         .classpage{
@@ -26,6 +27,7 @@
 
         #content {
             width: 100%;
+            display: flexbox;
             max-width: 900px;
             margin: 5px auto;
             position: relative;
@@ -46,6 +48,7 @@
 
         .sub_content{
             width: 100%;
+            display: flexbox;
             min-height: 100%;
             position: relative;
             box-sizing: border-box;
@@ -176,7 +179,7 @@
 <section class='sub_content'>
     <body>
         <div id=content>
-        <div class='row'>
+        <div class='row justify-content-center"'>
         <div class='col-md-6'>
             <h5>과목 키워드</h5><i class='fas fa-tag'>
                 </i>
@@ -194,6 +197,7 @@
                 {% for sub in simsub %}
                 <div class="classpage"> 
                 <li>
+                    <div style=" cursor: pointer;" onclick="location.href='{% url 'detail' sub.id %}';">
                     <div id='up'>
                     <small> {{sub.year}} {{sub.semester}} {{ sub.series_num }}-{{ sub.num}} </small>
                     <span id='bt-1'>{{ subject.category }}</span></div>
@@ -201,6 +205,7 @@
                     {{ sub.department }} 
                     <br/>{{ sub.professor }} 교수님<br/>
                     {{ sub.words_5|split|cut:'['|cut:']'|cut:"'"}}
+                    </div>
                 </li>
                 </div>
                 {% endfor %}
@@ -212,21 +217,24 @@
         <br/>
             <h5> 추천 K-MOOC </h5>
             {% if Mooclist %}
-                <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3">
+                <div class="row row-cols-1 row-cols-2 row-cols-3">
                     {% for mooc in Mooclist %}
                     <div class="card-deck">
-                        <div class='card'>
-                            <a href='{{ mooc.link }}'><img class="card-img-top" src='{{ mooc.image }}' height="200" alt="" style="display: block;"></a>
+                        <div class="row">
+                        <div class="col-auto mb-3">
+                        <div class='card' style="cursor: pointer;" onclick="location.href='{{ mooc.link }}';">
+                            <a href='{{ mooc.link }}'><img class="card-img-top" src='{{ mooc.image }}' height="200" width='250' alt="" style="display: block;"></a>
                             <div class="card-body">
                                 <h5 class="card-title">{{ mooc.name }}</h5>
-                                <p class="card-text">카테고리 : {{ mooc.midclassify }}</p>
-                                <p class="card-text"><small class="text-muted"> level : {{ mooc.level }}</small></p>
+                                <p class="card-text">카테고리: {{ mooc.level }}</p>
+                                <p class="card-text"><small class="text-muted"> 레벨 : {{ mooc.midclassify }}</small></p>
                             </div>    
+                        </div>
+                        </div>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
-        
                     {% else %}
                     <b><i> 추천 K-MOOC 강의가 없습니다 :( </i></b>
                     <br/><br/>
@@ -236,11 +244,13 @@
                 <br/>
                 <h5> 추천 교재 </h5>
                 {% if Booklist %}
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                <div class="row row-cols-1 row-cols-2 row-cols-3">
                 {% for book in Booklist %}
-                    <div class="card-mb-4">
-                        <div class='card'>
-                            <a href='{{ book.link }}'><img class="card-img-top" src='{{ book.image }}' height=300 alt="" style=" display: block;"></a>
+                    <div class="card-deck">
+                        <div class="row">
+                        <div class="col-auto mb-3">
+                        <div class='card' style=" cursor: pointer;" onclick="location.href='{{ book.link }}';">
+                            <a href='{{ book.link }}'><img class="card-img-top" src='{{ book.image }}' height="300" width='250' alt="" style=" display: block;"></a>
                             <div class="card-body">
                                 <h5 class="card-title">{{ book.title|cut:"<b>"|cut:"</b>"}}</h5>
                                 <p class="card-text">
@@ -248,6 +258,8 @@
                                         고려대학교 도서관 소장 정보</a></p>
                                 <p class="card-text"><small class="text-muted"> 가격 : {{ book.price }} 원</small></p>
                             </div>    
+                        </div>
+                        </div>
                         </div>
                     </div>  
 

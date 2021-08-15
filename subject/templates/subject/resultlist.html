@@ -82,7 +82,7 @@
         <h2> 과목 리스트  </h2>
         <p>총 {{ object_list.paginator.count }} 개의 검색결과 </p>
             {% for subject in object_list %}
-            <div class="classpage"> 
+            <div class="classpage" style=" cursor: pointer;" onclick="location.href='{% url 'detail' subject.id %}';"> 
                 <li>
                 <div id='up'>
                 <small> {{ subject.series_num }}-{{ subject.num}} </small>
@@ -93,8 +93,9 @@
                 {{ subject.department }}
                 <br/>{{ subject.professor }} 교수님<br/>
                 {{ subject.words_5|split|cut:'['|cut:']'|cut:"'" }}
-                </li>
-            </div>
+            </li>
+        </a>
+        </div>
 
             {% endfor %}
             {% if object_list.has_other_pages %}

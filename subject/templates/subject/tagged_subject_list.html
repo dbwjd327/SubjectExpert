@@ -52,7 +52,7 @@
             <ul class='list-group list-group-flush'>
                 {% for subject in object_list %}
                 <li class='list-group-item'>
-                    <div>
+                    <div style=" cursor: pointer;" onclick="location.href='{% url 'detail' subject.id %}';">
                         <div id='up'>
                         <h3><a href="{% url 'detail' subject.id %}" >{{ subject.name }}</a></h3> 
                         <p><span id='bt-1'>{{ subject.year }} {{ subject.semester }}</span> 
