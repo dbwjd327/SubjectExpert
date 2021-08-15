@@ -29,10 +29,10 @@ CLIENT_SECRET= "Rsgh7hzzMv" # 애플리케이션 등록시 발급 받은 값 입
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6#ga2&v%iro*_032_o+vx29(k18y=%04-f&y^cqbdz$5+mij8n'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
