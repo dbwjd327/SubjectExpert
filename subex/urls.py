@@ -11,6 +11,6 @@ urlpatterns = [
     path('search', search, name='searchview'),
     path('subject/<int:pk>/', SubjectDV.as_view(), name='detail'),
     path('tag/<str:tag>/',TaggedObjectLV.as_view(), name='tagged_object_list'),
-    # path('admin/', admin.site.urls),
-    # path('subject/', SubjectLV.as_view(), name='index'),
+    path('admin/', admin.site.urls),
+    path('subject/', SubjectLV.as_view(), name='index'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 
 import os
+import sys 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # remember on same level as manage.py base_dir 은 manage.py 랑 같은 레벨에 존재해야 함. 
@@ -22,8 +23,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(ROOT_DIR, '.media')
 
 #네이버 API 연결
-CLIENT_ID = "DlIBHl_yvWsGrO8Rxqwg" # 애플리케이션 등록시 발급 받은 값 입력
-CLIENT_SECRET= "Rsgh7hzzMv" # 애플리케이션 등록시 발급 받은 값 입력
+CLIENT_ID = "jCbo2qZ9gt7HaOhD7QlJ" # 애플리케이션 등록시 발급 받은 값 입력
+CLIENT_SECRET= "srAHf8Cd_E" # 애플리케이션 등록시 발급 받은 값 입력
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,7 +41,7 @@ chars = ''.join([string.ascii_letters, string.digits, string.punctuation]).repla
 SECRET_KEY = ''.join([random.SystemRandom().choice(chars) for i in range(50)])
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -149,3 +150,4 @@ REST_FRAMEWORK={
 
 CORS_ORIGIN_ALLOW_ALL=True
 CSRF_COOKIE_SECURE=True
+
