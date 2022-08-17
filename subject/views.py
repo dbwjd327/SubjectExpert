@@ -58,39 +58,40 @@ class SubjectDV(DetailView):
         obj= Kmooc.objects.filter(subject_ids=self.object.pk)
         context['Mooclist']=obj
         
-        # 네이버 API 로 추천교재 검색. 검색 단어(query)는 강의 키워드 상위3개
-        if len(queryset.keywords_3) != 0:
-            query=queryset.keywords_3
-            context['book_query']='단어로 검색'
+#         # 네이버 API 로 추천교재 검색. 검색 단어(query)는 강의 키워드 상위3개
+#         if len(queryset.keywords_3) != 0:
+#             query=queryset.keywords_3
+#             context['book_query']='단어로 검색'
 
-        # 결과가 존재하지 않을 경우, 검색 단어(query)는 강의명
-        else:
-            query=queryset.name
-            context['book_query']='강의명으로 검색'
-        context['query']=query
+#         # 결과가 존재하지 않을 경우, 검색 단어(query)는 강의명
+#         else:
+#             query=queryset.name
+#             context['book_query']='강의명으로 검색'
+#         context['query']=query
 
-        #display=3&sort=count -> 검색 결과 판매량 상위 책 3권의 데이터 json 형식으로 저장.
-        client_id=CLIENT_ID
-        client_secret= CLIENT_SECRET
-        encText = urllib.parse.quote(query) #검색어 입력
-        url = "https://openapi.naver.com/v1/search/book?query=" + encText +"&display=3&sort=count" 
+#         #display=3&sort=count -> 검색 결과 판매량 상위 책 3권의 데이터 json 형식으로 저장.
+#         client_id=CLIENT_ID
+#         client_secret= CLIENT_SECRET
+#         encText = urllib.parse.quote(query) #검색어 입력
+#         url = "https://openapi.naver.com/v1/search/book?query=" + encText +"&display=3&sort=count" 
         
-        request = urllib.request.Request(url)
-        request.add_header("X-Naver-Client-Id",client_id)
-        request.add_header("X-Naver-Client-Secret",client_secret)
-        response = urllib.request.urlopen(request)
-        rescode = response.getcode()
+#         request = urllib.request.Request(url)
+#         request.add_header("X-Naver-Client-Id",client_id)
+#         request.add_header("X-Naver-Client-Secret",client_secret)
+#         response = urllib.request.urlopen(request)
+#         rescode = response.getcode()
 
-        if(rescode==200):
-            response_body = response.read()
-            json_rt=response_body.decode('utf-8')
-            json_load=json.loads(json_rt)
-            context['Booklist']=json_load['items'] 
-            return context
+#         if(rescode==200):
+#             response_body = response.read()
+#             json_rt=response_body.decode('utf-8')
+#             json_load=json.loads(json_rt)
+#             context['Booklist']=json_load['items'] 
+#             return context
         
-        else:
-            print("Error Code:" + rescode)
-            return context
+#         else:
+#             print("Error Code:" + rescode)
+#             return context
+        return context
 
 ## 검색결과페이지 FunctionBasedView
 def search(request):
